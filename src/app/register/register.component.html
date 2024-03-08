@@ -1,0 +1,121 @@
+<form [formGroup]="registerForm" fxLayout="row wrap">
+  <div  fxLayout="row wrap" fxFlex="100">
+    <div fxFlex="100" class="bg-cover" fxLayoutAlign="space-between"><span style="color: white;">Register</span><mat-icon style="color: white;" mat-dialog-close>cancel</mat-icon></div>
+    <div fxFlex="100">
+      <div fxFlex="0 0 20" style="padding: 10px;">
+        <img [src]="(registerForm.value.profileImage)? (registerForm.value.profileImage) : '../../assets/profile.jpg' "  style="max-width: 100%; max-height: 200px;">
+        <button mat-raised-button color="primary" (click)="imgInput.click()">Upload Profile Picture</button>
+        <button mat-raised-button color="accent" (click)="edit=true" *ngIf="!edit">Edit Profile</button>
+        <input
+        #imgInput
+        type="file"
+        id="fileInput"
+        accept="image/*"
+        multiple
+        class="form-control-file"
+        (change)="onFileSelected($event)"
+        style="display: none;"
+      />
+      </div>
+      <div *ngIf="edit" fxFlex="80" fxLayout="row wrap" style="padding: 20px;">
+        
+        
+        <mat-form-field fxFlex="50" class="p-2" appearance="outline">
+          <mat-label>First Name</mat-label>
+          <input matInput [max]="20" placeholder="First Name" formControlName="firstName">
+          <mat-error>Enter valid First Name</mat-error>
+        </mat-form-field>
+        
+
+          <mat-form-field fxFlex="50" class="p-2" appearance="outline">
+            <mat-label>Last Name</mat-label>
+            <input matInput [max]="20" placeholder="Last Name" formControlName="lastName">
+            <mat-error>Enter valid Last Name</mat-error>
+          </mat-form-field>
+
+          <div fxFlex="100" fxLayout="row" class="p-2">
+            <span style="display: flex; align-items: center;" >{{slider.value}}</span>
+            <mat-slider fxFlex="90">
+              <input matSliderThumb formControlName="age" [min]="20" #slider>
+            </mat-slider>
+          </div>
+
+          <mat-form-field fxFlex="50" class="p-2" appearance="outline">
+            <mat-label>Email</mat-label>
+            <input type="email" matInput placeholder="Email" formControlName="mail">
+            <mat-error>Required</mat-error>
+          </mat-form-field>
+
+
+          <mat-form-field fxFlex="50" class="p-2" appearance="outline">
+            <mat-label>Mobile No.</mat-label>
+            <input type="number" matInput placeholder="Mobile No." formControlName="mobile" [min]="999999999" [max]="9999999999">
+            <mat-error>Enter valid No.</mat-error>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" fxFlex="50" class="p-2">
+            <mat-label>State</mat-label>
+            <mat-select placeholder="State" formControlName="state">
+              <mat-option value="Maharashtra">Maharashtra</mat-option>
+              <mat-option value="Goa">Goa</mat-option>
+              <mat-option value="Bihar">Bihar</mat-option>
+              <mat-option value="Punjab">Punjab</mat-option>
+            </mat-select>
+            <mat-error>Required</mat-error>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" fxFlex="50" class="p-2">
+            <mat-label>Country</mat-label>
+            <mat-select placeholder="Country" formControlName="country">
+              <mat-option value="India">India</mat-option>
+              <mat-option value="UK">UK</mat-option>
+              <mat-option value="US">US</mat-option>
+              <mat-option value="England">England</mat-option>
+            </mat-select>
+            <mat-error>Required</mat-error>
+          </mat-form-field>
+
+          <mat-form-field fxFlex="100" class="p-2" appearance="outline">
+            <mat-label>Address</mat-label>
+            <input matInput placeholder="Address" formControlName="address">
+            <mat-error>Required</mat-error>
+          </mat-form-field>
+
+          <mat-form-field fxFlex="50" class="p-2" appearance="outline">
+            <mat-label>Tags</mat-label>
+            <input matInput placeholder="Tags" formControlName="tags">
+          </mat-form-field>
+
+          <mat-checkbox  formControlName="isSubscribe" color="primary">Subscribe to newsletter</mat-checkbox>
+
+          <div fxFlex="100" fxLayout="row wrap" fxLayoutAlign="end" class="p-2">
+            <div fxFlex="20" class="p-2">
+              <button mat-raised-button type="button"  style="height: 40px;width: 100%;" color="warn" (click)="registerForm.reset()">Reset</button>
+            </div>
+            <div fxFlex="20" class="p-2">
+              <button mat-raised-button type="button"  style="height: 40px;width: 100%;" mat-dialog-close>Cancel</button>
+            </div>
+            <div fxFlex="20" class="p-2">
+              <button mat-raised-button type="button" color="primary" style="height: 40px;width: 100%;" (click)="submit()">Submit</button>
+            </div>
+
+          </div>
+
+
+
+
+
+
+
+      </div>
+      <div *ngIf="!edit" fxFlex="80" fxLayout="row wrap" style="padding: 20px;">
+        <p>I'm {{registerForm.value.firstName}} and Im above {{registerForm.value.age}} years and you can send your emails to <a [href]="registerForm.value.mail"></a>.
+        I live in the state of {{registerForm.value.state}}. I like to play {{registerForm.value.tags}}. And please send me newsletter. Please reach out to me on my phone number {{registerForm.value.mobile}}</p>
+        <button mat-raised-button color="primary">I Agree</button>
+      </div>
+    </div>
+  </div>
+
+
+
+</form>
